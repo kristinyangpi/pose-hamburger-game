@@ -1,0 +1,268 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --bg: #f3f0e9;
+  --card: #ffffff;
+  --text: #171717;
+  --muted: #716d67;
+  --line: #d8d1c8;
+  --soft: #ebe6de;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.page {
+  width: min(1080px, calc(100% - 28px));
+  margin: 0 auto;
+  padding: 40px 0 56px;
+}
+
+.kicker {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(42px, 7vw, 74px);
+  line-height: 0.96;
+  letter-spacing: -0.05em;
+}
+
+.sub {
+  max-width: 760px;
+  margin: 18px 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 26px;
+}
+
+button {
+  border: 0;
+  border-radius: 999px;
+  padding: 13px 20px;
+  background: #171717;
+  color: white;
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+#statusText {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.55fr) minmax(260px, 0.65fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.camera-card,
+.panel > * {
+  border: 1px solid var(--line);
+  background: var(--card);
+  border-radius: 22px;
+}
+
+.camera-card {
+  overflow: hidden;
+}
+
+.camera-stage {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #d8d4cd;
+}
+
+#webcam-container,
+#webcam-container canvas {
+  width: 100%;
+  height: 100%;
+}
+
+#webcam-container canvas {
+  display: block;
+  object-fit: cover;
+}
+
+.burger {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  transform: translate(-50%, -50%) scale(0.15);
+  font-size: clamp(72px, 11vw, 120px);
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  filter: drop-shadow(0 12px 12px rgba(0,0,0,.18));
+}
+
+.burger.visible {
+  opacity: 1;
+}
+
+.burger.eating {
+  animation: burgerBites 1.8s steps(5, end) forwards;
+}
+
+@keyframes burgerBites {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  20% {
+    transform: translate(-50%, -50%) scale(0.86) rotate(-3deg);
+  }
+  40% {
+    transform: translate(-50%, -50%) scale(0.68) rotate(3deg);
+  }
+  60% {
+    transform: translate(-50%, -50%) scale(0.5) rotate(-4deg);
+  }
+  80% {
+    transform: translate(-50%, -50%) scale(0.28) rotate(2deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.08);
+  }
+}
+
+.message {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: calc(100% - 32px);
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.9);
+  backdrop-filter: blur(10px);
+  font-size: 14px;
+  font-weight: 750;
+  text-align: center;
+}
+
+.panel {
+  display: grid;
+  gap: 14px;
+}
+
+.score-box,
+.readout,
+.steps {
+  padding: 20px;
+}
+
+.score-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.label {
+  font-size: 11px;
+  letter-spacing: .12em;
+  font-weight: 800;
+  color: var(--muted);
+}
+
+#score {
+  font-size: 52px;
+  font-weight: 850;
+  line-height: 1;
+}
+
+.readout-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+#poseLabel {
+  font-weight: 750;
+  text-align: right;
+}
+
+.bar {
+  height: 7px;
+  margin-top: 12px;
+  background: var(--soft);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.bar > div {
+  width: 0;
+  height: 100%;
+  background: #171717;
+  transition: width .12s linear;
+}
+
+.steps p {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin: 0 0 14px;
+  color: var(--muted);
+}
+
+.steps p:last-child {
+  margin-bottom: 0;
+}
+
+.steps b {
+  display: inline-grid;
+  place-items: center;
+  width: 27px;
+  height: 27px;
+  flex: 0 0 27px;
+  border-radius: 50%;
+  background: var(--soft);
+  color: var(--text);
+  font-size: 12px;
+}
+
+@media (max-width: 760px) {
+  .page {
+    width: min(100% - 20px, 680px);
+    padding-top: 24px;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .burger.eating {
+    animation: none;
+    opacity: 0;
+  }
+}

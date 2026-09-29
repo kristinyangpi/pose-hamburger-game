@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pose Hamburger Game</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@teachablemachine/pose@0.8/dist/teachablemachine-pose.min.js"></script>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <p class="kicker">POSE CLASSIFIER × FOOD INTERACTION</p>
+      <h1>Eat the burger.</h1>
+      <p class="sub">
+        Raise your <strong>left hand to your mouth</strong> to start eating.
+        When the burger is gone, give a <strong>right-hand thumbs up</strong> to finish.
+      </p>
+
+      <div class="controls">
+        <button id="startButton">Start Camera</button>
+        <span id="statusText">Camera not started.</span>
+      </div>
+    </header>
+
+    <section class="layout">
+      <div class="camera-card">
+        <div id="cameraStage" class="camera-stage">
+          <div id="webcam-container"></div>
+
+          <div id="burger" class="burger" aria-hidden="true">🍔</div>
+
+          <div id="message" class="message" aria-live="polite">
+            Raise your left hand to your mouth
+          </div>
+        </div>
+      </div>
+
+      <aside class="panel">
+        <div class="score-box">
+          <span class="label">SCORE</span>
+          <span id="score">0</span>
+        </div>
+
+        <div class="readout">
+          <div class="readout-row">
+            <span class="label">POSE</span>
+            <span id="poseLabel">—</span>
+          </div>
+          <div class="bar"><div id="poseBar"></div></div>
+        </div>
+
+        <div class="steps">
+          <p><b>1</b> Raise <strong>left hand to mouth</strong></p>
+          <p><b>2</b> Burger appears and gets eaten</p>
+          <p><b>3</b> Raise <strong>right-hand thumbs up</strong></p>
+          <p><b>4</b> Score +1</p>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
